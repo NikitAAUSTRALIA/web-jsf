@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+.main-header {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 25px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
+    height: 100%;
+}
+
+.horizontal-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.center-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 50px;
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.clock-section {
+    flex: 1;
+    text-align: center;
+    min-width: 300px;
+}
+
+.clock-display {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 30px 20px;
+    border: 2px solid rgba(168, 237, 234, 0.4);
+    margin-bottom: 15px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.current-date {
+    font-size: 20px;
+    color: #a8edea;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.current-time {
+    font-size: 52px;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Courier New', Consolas, monospace;
+    letter-spacing: 2px;
+}
+
+.action-section {
+    flex: 1;
+    text-align: center;
+    height: 50px;
+}
+
+.start-app-btn {
+    background: #0072ff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 22px;
+    height: 100%;
+    width: 50%;
+    border-radius: 50px !important;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-app-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 114, 255, 0.6);
+    background: #009dff;
+}
+
+.hidden {
+    display: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    gap: 2.5%;
+    padding: 2.5% 2.5%;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    gap: 20px 20px;
+    width: 30%;
+    height: 100%;
+}
+
+.graph-container {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    aspect-ratio: 1/1;
+}
+
+.r-form-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.graph-and-form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 30%;
+}
+
+.table-container {
+    width: 50%;
+}
+
+.form-group {
+    margin: 20px 0;
+    padding: 20px 20px;
+    font-size: 20px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.r-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.r-link {
+    display: inline-block;
+    padding: 8px 15px;
+    color: #ffffff !important;
+    background: #0072ff !important;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.r-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 114, 255, 0.6);
+    background: #009dff;
+}
+
+.submit-btn {
+    margin: 20px 20px;
+    min-width: 150px;
+    height: 40px;
+    color: #ffffff !important;
+    background: #0072ff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 50px !important;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 114, 255, 0.6);
+    background: #009dff;
+}
+
+.ui-datatable {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.result-table thead th {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    padding: 12px !important;
+    text-align: center !important;
+}
+
+.result-table tbody td {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #000 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 10px !important;
+    text-align: center !important;
+}

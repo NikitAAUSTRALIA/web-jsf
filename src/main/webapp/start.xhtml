@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Лабораторная работа №3 | Вариант 28069</title>
+    <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+    <header class="main-header">
+        <div class="header-content">
+            Лабораторная работа № 3 | Вариант 28069<br/>
+            Селецкий Никита Антонович | P3215
+        </div>
+    </header>
+
+    <div class="horizontal-container">
+        <div class="center-panel">
+            <div class="clock-section">
+                <div class="clock-display">
+                    <div class="current-date" id="current-date"></div>
+                    <div class="current-time" id="current-time"></div>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <p:button value="Главная страница"
+                          outcome="main"
+                          styleClass="start-app-btn"/>
+            </div>
+        </div>
+    </div>
+</h:body>
+<script type="text/javascript" src="js/start.js"></script>
+</html>

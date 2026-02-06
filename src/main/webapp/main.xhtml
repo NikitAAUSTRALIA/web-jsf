@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <meta charset="UTF-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>Лабораторная работа №3 | Вариант 28069</title>
+   <h:outputStylesheet name="css/styles.css"/>
+</h:head>
+<h:body>
+   <header class="main-header">
+      <div class="header-content">
+         Лабораторная работа № 3 | Вариант 28069<br/>
+         Селецкий Никита Антонович | P3215
+      </div>
+   </header>
+   <div class="main">
+      <div class="form-container">
+         <h:form id="coordsForm">
+            <div class="form-group">
+               <label class="form-label">X</label><br/>
+               <p:spinner value="#{resultsBean.currentX}"
+                          min="-5"
+                          max="5"
+                          stepFactor="1"
+                          size="5" />
+            </div>
+            
+            <div class="form-group">
+               <label class="form-label">Y</label><br/>
+               <h:inputText value="#{resultsBean.currentY}"
+                            size="5"
+                            styleClass="form-control">
+                  <f:validateDoubleRange minimum="-5" maximum="5" />
+               </h:inputText>
+            </div>
+            <div class="form-group">
+               <p:commandButton value="Отправить"
+                                action="#{requestBean.checkPoint()}"
+                                styleClass="submit-btn"
+                                update=":resultsTable :coordinateGraph"
+                                oncomplete="handleCanvasResponse(xhr, status, args)"/>
+               <h:commandButton value="Очистить"
+                                action="#{requestBean.clearHistory()}"
+                                styleClass="submit-btn">
+                  <f:ajax execute="@this"
+                          render=":resultsTable :rForm:R :rForm:rValueDisplay"/>
+               </h:commandButton>
+            </div>
+            <div class="form-group">
+               <p:button value="Стартовая страница"
+                      outcome="start"
+                      styleClass="submit-btn"/>
+            </div>
+         </h:form>
+      </div>
+      <div class="graph-and-form-container">
+         <div class="graph-container">
+            <canvas id="coordinateGraph" width="300" height="300"></canvas>
+         </div>
+         <div class="r-form-container">
+            <h:form id="rForm">
+               <h:inputHidden id="R" value="#{resultsBean.currentR}"> </h:inputHidden>
+               <h:outputText id="rValueDisplay"
+                             value="Выбрано R: #{resultsBean.currentR != null ? resultsBean.currentR : 'не выбрано'}" />
+               <div class="r-buttons">
+                  <h:commandLink value="1"
+                                 action="#{resultsBean.setCurrentR('1')}"
+                                 styleClass="r-link">
+                     <p:ajax update=":rForm:rValueDisplay :rForm:R"
+                             process="@this"
+                             immediate="true" />
+                  </h:commandLink>
+
+                  <h:commandLink value="2"
+                                 action="#{resultsBean.setCurrentR('2')}"
+                                 styleClass="r-link">
+                     <p:ajax update=":rForm:rValueDisplay :rForm:R"
+                             process="@this"
+                             immediate="true" />
+                  </h:commandLink>
+   
+                  <h:commandLink value="3"
+                                 action="#{resultsBean.setCurrentR('3')}"
+                                 styleClass="r-link">
+                     <p:ajax update=":rForm:rValueDisplay :rForm:R"
+                             process="@this"
+                             immediate="true" />
+                  </h:commandLink>
+
+                  <h:commandLink value="4"
+                                 action="#{resultsBean.setCurrentR('4')}"
+                                 styleClass="r-link">
+                     <p:ajax update=":rForm:rValueDisplay :rForm:R"
+                             process="@this"
+                             immediate="true" />
+                  </h:commandLink>
+
+                  <h:commandLink value="5"
+                                 action="#{resultsBean.setCurrentR('5')}"
+                                 styleClass="r-link">
+                     <p:ajax update=":rForm:rValueDisplay :rForm:R"
+                             process="@this"
+                             immediate="true" />
+                  </h:commandLink>
+               </div>
+            </h:form>
+         </div>
+      </div>
+      <div class="table-container">
+         <p:dataTable id="resultsTable"
+                      value="#{resultsBean.getResults()}" var="result" styleClass="result-table">
+            <p:column headerText="X">
+               <h:outputText value="#{result.x}"/>
+            </p:column>
+            <p:column headerText="Y">
+               <h:outputText value="#{result.y}"/>
+            </p:column>
+            <p:column headerText="R">
+               <h:outputText value="#{result.r}"/>
+            </p:column>
+            <p:column headerText="Hit">
+               <h:outputText value="#{result.hit}"/>
+            </p:column>
+            <p:column headerText="Timestamp">
+               <h:outputText value="#{result.timestamp}"/>
+            </p:column>
+            <p:column headerText="Execution Time">
+               <h:outputText value="#{result.execTime}"/>
+            </p:column>
+         </p:dataTable>
+      </div>
+   </div>
+</h:body>
+<script type="text/javascript" src="js/graph.js"> </script>
+<p:remoteCommand name="addPointFromCanvas"
+                 action="#{canvasBean.processCanvasClick}"
+                 update="resultsTable"
+                 oncomplete="handleCanvasResponse(xhr, status, args)" />
+</html>
