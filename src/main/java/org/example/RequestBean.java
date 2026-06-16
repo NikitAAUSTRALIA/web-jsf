@@ -1,5 +1,8 @@
 package org.example;
 
+import MBean.MBeanRegister;
+import MBean.PointStatistics;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.context.FacesContext;
@@ -20,10 +23,27 @@ public class RequestBean {
     @Inject
     private PointService pointService;
 
+    private PointStatistics pointStats;
+
+    @PostConstruct
+    public void init() {
+        try {
+            pointStats = MBeanRegister.getPointStatistics();
+            if (pointStats != null) {
+                System.out.println("MBean доступен в RequestBean");
+            } else {
+                System.out.println("MBean еще не зарегистрирован");
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка получения MBean: " + e.getMessage());
+        }
+    }
+    
     public void clearHistory(){
         resultsBean.setCurrentR(null);
         resultsBean.clearResults();
         pointService.clearHistory();
+        pointStats.onPointUpdate();
     }
     
     public void checkPoint() {
@@ -45,6 +65,7 @@ public class RequestBean {
         PrimeFaces.current().ajax().addCallbackParam("hit", hit);
         resultsBean.setCurrentX(null);
         resultsBean.setCurrentY(null);
+        pointStats.onPointUpdate();
     }
 
     private boolean checkArea(BigDecimal x, BigDecimal y, BigDecimal r) {

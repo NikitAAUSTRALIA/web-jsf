@@ -1,5 +1,8 @@
 package org.example;
 
+import MBean.MBeanRegister;
+import MBean.PointStatistics;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -23,7 +26,22 @@ public class CanvasBean implements Serializable {
     private BigDecimal y;
     private BigDecimal r;
     private boolean hit;
+    private PointStatistics pointStats;
 
+    @PostConstruct
+    public void init() {
+        try {
+            pointStats = MBeanRegister.getPointStatistics();
+            if (pointStats != null) {
+                System.out.println("MBean доступен в CanvasBean");
+            } else {
+                System.out.println("MBean еще не зарегистрирован");
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка получения MBean: " + e.getMessage());
+        }
+    }
+    
     public void processCanvasClick() {
         long startTime = System.nanoTime();
         FacesContext context = FacesContext.getCurrentInstance();
@@ -42,7 +60,7 @@ public class CanvasBean implements Serializable {
             PrimeFaces.current().ajax().addCallbackParam("y", y);
             PrimeFaces.current().ajax().addCallbackParam("r", r);
             PrimeFaces.current().ajax().addCallbackParam("hit", hit);
-
+            pointStats.onPointUpdate();
         } catch (Exception e) {
             PrimeFaces.current().ajax().addCallbackParam("success", false);
             PrimeFaces.current().ajax().addCallbackParam("error", e.getMessage());

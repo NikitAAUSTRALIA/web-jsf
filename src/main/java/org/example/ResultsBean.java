@@ -1,5 +1,7 @@
 package org.example;
 
+import MBean.AreaCalculator;
+import MBean.MBeanRegister;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.annotation.PostConstruct;
@@ -16,6 +18,7 @@ public class ResultsBean implements Serializable {
     private BigDecimal currentX;
     private BigDecimal currentY;
     private BigDecimal currentR;
+    private AreaCalculator areaCalculator;
     
     @PostConstruct
     public void init() {
@@ -23,6 +26,16 @@ public class ResultsBean implements Serializable {
         currentX = null;
         currentY = null;
         currentR = null;
+        try {
+            areaCalculator = MBeanRegister.getAreaCalculator();
+            if (areaCalculator != null) {
+                System.out.println("MBean доступен в ResultsBean");
+            } else {
+                System.out.println("MBean еще не зарегистрирован");
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка получения MBean: " + e.getMessage());
+        }
     }
     
     public BigDecimal getCurrentX() {
@@ -48,9 +61,11 @@ public class ResultsBean implements Serializable {
     public void setCurrentR(String currentR) {
         if (currentR == null) {
             this.currentR = null;
+            areaCalculator.setCurrentRadius(0.0);
             return;
         }
         this.currentR = new BigDecimal(currentR);
+        areaCalculator.setCurrentRadius(this.currentR.doubleValue());
         System.out.println("Current R: " + this.currentR);
     }
     
