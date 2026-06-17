@@ -13,10 +13,14 @@ public class MBeanRegister {
     public static void registerAll(ResultsBean resultsBean) throws Exception {
         MBeanServer server = ManagementFactory.getPlatformMBeanServer();
         pointStats = new PointStatistics(resultsBean);
-        server.unregisterMBean(new ObjectName("MBean:type=PointStatistics"));
+        if (server.isRegistered(new ObjectName("MBean:type=PointStatistics"))) {
+            server.unregisterMBean(new ObjectName("MBean:type=PointStatistics"));
+        }
         server.registerMBean(pointStats, new ObjectName("MBean:type=PointStatistics"));
         areaCalc = new AreaCalculator();
-        server.unregisterMBean(new ObjectName("MBean:type=AreaCalculator"));
+        if (server.isRegistered(new ObjectName("MBean:type=AreaCalculator"))) {
+            server.unregisterMBean(new ObjectName("MBean:type=AreaCalculator"));
+        }
         server.registerMBean(areaCalc, new ObjectName("MBean:type=AreaCalculator"));
         System.out.println("MBean зарегистрированы");
     }
